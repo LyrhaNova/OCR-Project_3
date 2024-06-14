@@ -3,259 +3,509 @@
    License: none (public domain)
 */
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video, button {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video,
+button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
-	display: block;
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+/* Avoid page moving because of the scrollbar */
+html {
+  overflow-y: scroll;
+}
+a {
+  text-decoration: none;
+  color: black;
 }
 body {
-	line-height: 1;
+  line-height: 1;
 }
-ol, ul {
-	list-style: none;
+ol,
+ul {
+  list-style: none;
 }
-blockquote, q {
-	quotes: none;
+blockquote,
+q {
+  quotes: none;
 }
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
 }
 table {
-	border-collapse: collapse;
-	border-spacing: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 /** end reset css**/
 body {
-	max-width: 1140px;
-	margin:auto;
-	font-family: 'Work Sans' ;
-	font-size: 14px;
+  max-width: 1140px;
+  margin: auto;
+  font-family: "Work Sans";
+  font-size: 14px;
 }
 header {
-	display: flex;
-	justify-content: space-between;
-	margin: 50px 0
+  display: flex;
+  justify-content: space-between;
+  margin: 50px 0;
 }
 section {
-	margin: 50px 0
+  margin: 50px 0;
 }
 
-h1{
-	display: flex;
-	flex-direction: column;
-	font-family: 'Syne';
-	font-size: 22px;
-	font-weight: 800;
-	color: #B1663C
+h1 {
+  display: flex;
+  flex-direction: column;
+  font-family: "Syne";
+  font-size: 22px;
+  font-weight: 800;
+  color: #b1663c;
 }
 
 h1 > span {
-	font-family: 'Work Sans';
-	font-size:10px;
-	letter-spacing: 0.1em;
-;
+  font-family: "Work Sans";
+  font-size: 10px;
+  letter-spacing: 0.1em;
 }
 
-h2{
-	font-family: 'Syne';
-	font-weight: 700;
-	font-size: 30px;
-	color: #1D6154
+h2 {
+  font-family: "Syne";
+  font-weight: 700;
+  font-size: 30px;
+  color: #1d6154;
 }
 nav ul {
-	display: flex;
-	align-items: center;
-	list-style-type: none;
-
+  display: flex;
+  align-items: center;
+  list-style-type: none;
 }
 nav li {
-	padding: 0 10px;
-	font-size: 1.2em;
+  padding: 0 10px;
+  font-size: 1.2em;
 }
 
-li:hover {
-	color: #B1663C;
-	cursor: pointer;
+li a:hover {
+  color: #b1663c;
+  cursor: pointer;
 }
 #introduction {
-	display: flex;
-	align-items: center;
-	margin-bottom: 8em;
+  display: flex;
+  align-items: center;
+  margin-bottom: 8em;
 }
 #introduction figure {
-	flex: 1
+  flex: 1;
 }
 #introduction img {
-	display: block;
-	margin: auto;
-	width: 80%;
+  display: block;
+  margin: auto;
+  width: 80%;
 }
 
 #introduction article {
-	flex: 1
+  flex: 1;
 }
 #introduction h2 {
-	margin-bottom: 1em;
+  margin-bottom: 1em;
 }
 
 #introduction p {
-	margin-bottom: 0.5em;
+  margin-bottom: 0.5em;
 }
 #portfolio h2 {
-	text-align: center;
-	margin-bottom: 2em;
+  text-align: center;
+  margin-bottom: 2em;
 }
 .gallery {
-	width: 100%;
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
-	grid-column-gap: 20px;
-	grid-row-gap: 20px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
 }
 
 .gallery img {
-	width: 100%;
-
+  width: 100%;
 }
 #contact {
-	width: 50%;
-margin: auto;
+  width: 50%;
+  margin: auto;
 }
 #contact > * {
-	text-align: center;
-
+  text-align: center;
 }
-#contact h2{
-	margin-bottom: 20px;
+#contact h2 {
+  margin-bottom: 20px;
 }
-#contact form, #connexion form {
-	text-align: left;
-	margin-top: 20px;
-	display: flex;
-	flex-direction: column;
-}
-
-#contact input, #connexion input {
-	height: 50px;
-	font-size: 1.2em;
-	border: none;
-	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
-}
-#contact label, #connexion label {
-	margin: 2em 0 1em 0;
-}
-#contact textarea, #connexion textarea {
-	border: none;
-	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+#contact form,
+#connexion form {
+  text-align: left;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
-input[type="submit"]{
-	font-family: 'Syne';
-	font-weight: 700;
-	color: white;
-	background-color: #1D6154;
-	margin : 2em auto ;
-	width: 180px;
-	text-align: center;
-	border-radius: 60px ;
+#contact input,
+#connexion input {
+  height: 50px;
+  font-size: 1.2em;
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+#contact label,
+#connexion label {
+  margin: 2em 0 1em 0;
+}
+#contact textarea,
+#connexion textarea {
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+input[type="submit"] {
+  font-family: "Syne";
+  font-weight: 700;
+  color: white;
+  background-color: #1d6154;
+  margin: 2em auto;
+  width: 180px;
+  text-align: center;
+  border-radius: 60px;
 }
 
 input[type="submit"]:active {
-	background-color: #0E2F28;
+  background-color: #0e2f28;
 }
 
 footer nav ul {
-	display: flex;
-	justify-content: flex-end;
-	margin: 2em
+  display: flex;
+  justify-content: flex-end;
+  margin: 2em;
 }
 
 /* Buttons */
 
 .filters {
-	display: flex;
-	justify-content: center;
-	gap: 10px;
-	margin-bottom: 4em;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 4em;
 }
 
 button {
-	font-family: 'Syne';
-	font-weight: 700;
-	font-size: 17px;
-	color: #1D6154;
-	background-color: white;
-	border: solid 1px;
-	border-radius: 18px;
-	padding: 9px 15px 9px 15px;
-	min-width: 100px;
+  font-family: "Syne";
+  font-weight: 700;
+  font-size: 17px;
+  color: #1d6154;
+  background-color: white;
+  border: solid 1px;
+  border-radius: 18px;
+  padding: 9px 15px 9px 15px;
+  /* min-width: 100px; */
 }
 
 button:hover {
-	cursor: pointer;
+  cursor: pointer;
 }
 
 button:focus {
-	color: white;
-	background-color: #1D6154;
+  color: white;
+  background-color: #1d6154;
 }
 
 #connexion h2 {
-	display: flex;
-	justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 #connexion {
-	display: block;
-	justify-content: center;
-	align-items: center;
-	height: 850px;
-	width: 50%;
-	margin: auto;
+  display: block;
+  justify-content: center;
+  align-items: center;
+  height: 850px;
+  width: 50%;
+  margin: auto;
 }
 
 #connexion [type="submit"] {
-	margin-top: 50px;
+  margin-top: 50px;
 }
 
 #connexion [type="submit"]:active {
-	background-color: #0E2F28;
+  background-color: #0e2f28;
 }
 
 #formCo form {
-	width: 100%;
+  width: 100%;
 }
 
 #connexion a {
-	display: flex;
-	justify-content: center;
-	text-decoration: underline;
-	text-underline-offset: 2px;
-	/* text-underline-offset ne fonctionne pas sur Firefox */
+  display: flex;
+  justify-content: center;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  /* text-underline-offset ne fonctionne pas sur Firefox Android */
 }
 
-.noDisplay {
-	display: none;
+.error-message {
+  display: none;
+  color: red;
+  margin-top: 5px;
 }
+
+/*************************************************************************************
+********************************************************************* Mode édition **/
+
+i {
+  font-size: 17px;
+}
+
+.editionMode {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Position fixed ou absolute selon préférences */
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  width: 100vw;
+  gap: 8px;
+  height: 60px;
+  font-size: 13px;
+  color: white;
+  background-color: black;
+}
+
+.marginHeader {
+  margin-top: 90px;
+}
+
+.modifierProjets {
+  display: inline-flex;
+  padding-left: 40px;
+  margin-bottom: 30px;
+}
+
+.modifierProjets i,
+.modifierProjets button {
+  font-size: 13px;
+  padding: 0;
+  color: black;
+  border: none;
+}
+
+.modifierProjets button:focus {
+  color: black;
+  background-color: transparent;
+}
+
+/* MADA MADA */
+
+.modal {
+  display: none;
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.modalContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  background-color: #fefefe;
+  padding: 30px;
+  border-radius: 10px;
+  width: 660px;
+  height: 730px;
+}
+
+.modalContent h2 {
+  font-family: Work Sans;
+  font-weight: 100;
+  color: black;
+  font-size: 27px;
+  margin: 5px 0px 50px 0px;
+}
+
+.closeBtn {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.closeBtn i {
+  font-size: 22px;
+}
+
+.photoList {
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  width: 75%;
+  height: 470px;
+  gap: 10px;
+  padding-bottom: 50px;
+  border-bottom: 1px solid #b3b3b3;
+  overflow-y: auto;
+}
+
+.modalContent button {
+  font-size: 15px;
+  color: white;
+  background-color: #1d6154;
+  width: 260px;
+  margin-top: 45px;
+}
+
+button:active {
+  color: white;
+  background-color: #0e2f28;
+}
+
+.image-wrapper {
+  display: inline-block;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.image-wrapper img {
+  display: block;
+  width: 90px;
+  height: 120px;
+  object-fit: fill;
+  padding-bottom: 20px;
+}
+
+#deleteImgBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: -38px;
+  right: 8px;
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+  width: 23px;
+  height: 20px;
+  border-radius: 0;
+  border-radius: 3px;
+}
+
+#deleteImgBtn i {
+  font-size: 12px;
+}
+
+/* À modifier : le h2 "Mes Projets" n'est pas centré correctement
+à cause de la div rajoutée "modifierProjets" */

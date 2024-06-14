@@ -26,6 +26,12 @@ exports.signup = async (req, res) => {
 }
 
 exports.login = async (req, res) => {
+	if (!req.body.email || !req.body.password) {
+		return res.status(400).send({
+			message: "Must have email and password"
+		});
+	}
+	
 	const user = await Users.findOne({where: {email: req.body.email}});
 	if(user === null){
 		return res.status(404).json({message: 'user not found'})
