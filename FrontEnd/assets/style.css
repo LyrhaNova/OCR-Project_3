@@ -2,6 +2,9 @@
    v2.0 | 20110126
    License: none (public domain)
 */
+* {
+  box-sizing: border-box;
+}
 
 html,
 body,
@@ -179,7 +182,7 @@ nav ul {
   list-style-type: none;
 }
 nav li {
-  padding: 0 10px;
+  padding: 0 17px;
   font-size: 1.2em;
 }
 
@@ -221,6 +224,7 @@ li a:hover {
   grid-template-columns: 1fr 1fr 1fr;
   grid-column-gap: 20px;
   grid-row-gap: 20px;
+  margin-top: 60px;
 }
 
 .gallery img {
@@ -288,7 +292,6 @@ footer nav ul {
   display: flex;
   justify-content: center;
   gap: 10px;
-  margin-bottom: 4em;
 }
 
 button {
@@ -300,7 +303,6 @@ button {
   border: solid 1px;
   border-radius: 18px;
   padding: 9px 15px 9px 15px;
-  /* min-width: 100px; */
 }
 
 button:hover {
@@ -349,7 +351,7 @@ button:focus {
 .error-message {
   display: none;
   color: red;
-  margin-top: 5px;
+  margin-top: 10px;
 }
 
 /*************************************************************************************
@@ -359,11 +361,14 @@ i {
   font-size: 17px;
 }
 
+#logout {
+  display: none;
+}
+
 .editionMode {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* Position fixed ou absolute selon préférences */
   position: fixed;
   left: 0;
   right: 0;
@@ -380,18 +385,37 @@ i {
   margin-top: 90px;
 }
 
-.modifierProjets {
-  display: inline-flex;
-  padding-left: 40px;
-  margin-bottom: 30px;
+.mesProjets {
+  display: flex;
+  width: 100%;
+  margin-bottom: 50px;
 }
 
-.modifierProjets i,
+#mesProjets h2 {
+  justify-content: flex-end;
+  text-align: right;
+  width: 59%;
+  margin: 0;
+
+}
+
+.modifierProjets {
+  width: 41%;
+  padding-top: 3px;
+  /* display: none; */
+}
+
+.modifierProjets i {
+  font-size: 16px;
+  margin-left: 15px;
+}
+
 .modifierProjets button {
+  font-family: "Work Sans";
   font-size: 13px;
-  padding: 0;
   color: black;
   border: none;
+  padding-left: 7px;
 }
 
 .modifierProjets button:focus {
@@ -425,6 +449,7 @@ i {
   border-radius: 10px;
   width: 660px;
   height: 730px;
+  margin-top: 3%;
 }
 
 .modalContent h2 {
@@ -432,37 +457,51 @@ i {
   font-weight: 100;
   color: black;
   font-size: 27px;
-  margin: 5px 0px 50px 0px;
+  margin: 40px 0px 50px 0px;
 }
 
-.closeBtn {
+.divButton {
   display: flex;
-  justify-content: flex-end;
-  width: 100%;
+  width: 95%;
+  position: relative;
 }
 
-.closeBtn i {
-  font-size: 22px;
+.divButton i {
+  font-size: 25px;
+}
+
+#back {
+  display: none;
+  position: absolute;
+  cursor: pointer;
+}
+
+#closeBtn {
+  display: flex;
+  position: absolute;
+  left: 97%;
+  cursor: pointer;
 }
 
 .photoList {
   display: flex;
   flex-wrap: wrap;
   position: relative;
-  width: 75%;
+  width: 77%;
   height: 470px;
   gap: 10px;
-  padding-bottom: 50px;
+  padding-bottom: 40px;
   border-bottom: 1px solid #b3b3b3;
   overflow-y: auto;
 }
 
 .modalContent button {
+  display: block;
   font-size: 15px;
   color: white;
   background-color: #1d6154;
   width: 260px;
-  margin-top: 45px;
+  margin-top: 35px;
 }
 
 button:active {
@@ -471,18 +510,19 @@ button:active {
 }
 
 .image-wrapper {
-  display: inline-block;
+  display: flex;
   position: relative;
   top: 0;
   left: 0;
+  height: 120px;
 }
 
 .image-wrapper img {
   display: block;
-  width: 90px;
+  width: 82px;
   height: 120px;
   object-fit: fill;
-  padding-bottom: 20px;
+  padding-bottom: 17px;
 }
 
 #deleteImgBtn {
@@ -490,7 +530,7 @@ button:active {
   align-items: center;
   justify-content: center;
   position: absolute;
-  top: -38px;
+  top: -28px;
   right: 8px;
   background-color: black;
   color: white;
@@ -503,9 +543,140 @@ button:active {
   border-radius: 3px;
 }
 
-#deleteImgBtn i {
-  font-size: 12px;
+/******************************************************************* FORMULAIRE ALL */
+#formAjoutPhoto {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+/******************************************************************* DIV AJOUT PHOTOS */
+
+.divAjoutPhoto {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 75%;
+  height: 205px;
+  border-radius: 5px;
+  background: #e8f1f6;
+  margin-bottom: 5px;
+}
+
+.divAjoutPhoto span {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 22px 0px 13px 0px;
+}
+
+.divAjoutPhoto i {
+  font-size: 80px;
+  color: #b9c5cc;
+}
+
+.divUploadFile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38%;
+  height: 43px;
+  border-radius: 20px;
+  color: #306685;
+  background-color: #cbd6dc;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+#file {
+  display: none;
+}
+
+/********************************************************************* DIV FORMULAIRES */
+
+.divForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 75%;
+}
+
+.divForm label {
+  display: flex;
+  width: 100%;
+  font-size: 17px;
+  margin-top: 23px;
+}
+
+#inputTitle,
+#cat {
+  display: flex;
+  width: 100%;
+  height: 55px;
+  padding-left: 25px;
+  margin-top: 10px;
+  font-family: "Work Sans";
+  font-size: 16px;
+  color: #444444;
+  border: none;
+  box-shadow: 0px 6px 15px 2px rgba(0, 0, 0, 0.08);
+}
+
+#cat {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png");
+  background-repeat: no-repeat;
+  background-position: right 30px top 50%;
+  background-size: 10px;
+}
+
+#inputTitle:focus,
+#cat:focus {
+  outline: none;
+}
+
+.divBorder {
+  margin-top: 49px;
+  width: 100%;
+  height: 1px;
+  background: #b3b3b3;
+}
+
+#btnValider {
+  background-color: #a7a7a7;
+}
+
+/* boop */
+
+.uploadImagePreview {
+  width: 36%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#photoList::-webkit-scrollbar {
+	width: 6px;
+	background-color: #F5F5F5;
+}
+ 
+#photoList::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+ 
+#photoList::-webkit-scrollbar-thumb {
+	background-color: #a1a1a1;
+
+}
+
+.btnValiderColor {
+  background-color: #1d6154 !important;
+  transition: 1s;
 }
 
 /* À modifier : le h2 "Mes Projets" n'est pas centré correctement
 à cause de la div rajoutée "modifierProjets" */
+/* Position relative pour le -modifier
+/* scroll barre overflow

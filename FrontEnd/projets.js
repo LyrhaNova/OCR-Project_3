@@ -1,15 +1,11 @@
 ///////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////// Général
-// Appel de l'API -> /works
+
 const apiWorks = await fetch("http://localhost:5678/api/works");
-
 const getElement = (selector) => document.querySelector(selector);
-
-// Appel des modules lorsque l'on clique sur "projets"
 const btnProjets = document.getElementById("projets");
 
 btnProjets.addEventListener("click", function () {
-  // Permet d'afficher tous les projets au retour de l'index
   genWorks(worksList);
 });
 
@@ -19,17 +15,20 @@ btnProjets.addEventListener("click", function () {
 let worksList = [];
 worksList = await apiWorks.json();
 
-console.table(worksList);
-
 // Fonction de génération des <figures> de la galerie
-function genWorks(worksList) {
+export async function genWorks() {
+  const worksList = await fetch("http://localhost:5678/api/works").then((res) =>
+    res.json()
+  );
+
+  const divGallery = document.querySelector(".gallery");
+  divGallery.innerHTML = "";
+
   for (let i = 0; i < worksList.length; i++) {
     const article = worksList[i];
 
-    const divGallery = document.querySelector(".gallery");
-
     const figureWorks = document.createElement("figure");
-    figureWorks.dataset.id = worksList[i].id;
+    figureWorks.dataset.id = article.id;
     const imageWorks = document.createElement("img");
     imageWorks.src = article.imageUrl;
     const figcapWorks = document.createElement("figcaption");
@@ -41,6 +40,7 @@ function genWorks(worksList) {
   }
 }
 
+console.table(worksList);
 genWorks(worksList);
 
 ///////////////////////////////////////////////////////////////////////////////////
@@ -57,13 +57,14 @@ const btnTous = document.querySelector(".btnTous");
 btnTous.addEventListener("click", function () {
   document.querySelector(".gallery").innerHTML = "";
   genWorks(worksList);
+  console.table(worksList);
 });
 
 // Filtre d'Objets
 const btnObjects = document.querySelector(".btnObjets");
 btnObjects.addEventListener("click", function () {
-  const objectsFilter = worksList.filter(function (categoryWorksList) {
-    return categoryWorksList.categoryId === 1;
+  const objectsFilter = worksList.filter(function (work) {
+    return work.categoryId === 1;
   });
   console.table(objectsFilter);
   document.querySelector(".gallery").innerHTML = "";
@@ -73,8 +74,8 @@ btnObjects.addEventListener("click", function () {
 // Filtre d'Appartements
 const btnAppt = document.querySelector(".btnAppt");
 btnAppt.addEventListener("click", function () {
-  const apptFilter = worksList.filter(function (categoryWorksList) {
-    return categoryWorksList.categoryId === 2;
+  const apptFilter = worksList.filter(function (work) {
+    return work.categoryId === 2;
   });
   console.table(apptFilter);
   document.querySelector(".gallery").innerHTML = "";
@@ -84,15 +85,13 @@ btnAppt.addEventListener("click", function () {
 // Filtre d'Hôtels & Restaurants
 const btnHotelsRest = document.querySelector(".btnHotelsRest");
 btnHotelsRest.addEventListener("click", function () {
-  const HotelsRestFilter = worksList.filter(function (categoryWorksList) {
-    return categoryWorksList.categoryId === 3;
+  const HotelsRestFilter = worksList.filter(function (work) {
+    return work.categoryId === 3;
   });
   console.table(HotelsRestFilter);
   document.querySelector(".gallery").innerHTML = "";
   genWorks(HotelsRestFilter);
 });
-
-// À rectifier : le focus des btns du filtre qui partent à la plage
 
 ///////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////// Gestion du log-out
@@ -105,6 +104,3 @@ btnLogout.addEventListener("click", function (event) {
   sessionStorage.clear();
   window.location.href = "index.html";
 });
-
-///////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////

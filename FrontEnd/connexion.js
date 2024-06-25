@@ -83,5 +83,3 @@ formCo.addEventListener("submit", async function (event) {
 
 // Rajouter l'affichage de l'erreur de connexion lorsque l'e-mail
 // est bon mais pas le mdp
-// À demander : cliquer sur "projets" ou "login" fait apparaitre brièvement
-// "logout", comment régler ce problème d'affichage ? .preventDefault ?
