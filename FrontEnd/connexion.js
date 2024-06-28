@@ -1,3 +1,6 @@
+// ********************************************************************************************* VARIABLE(S)
+
+// Api variables & constants
 const apiWorks = await fetch("http://localhost:5678/api/works");
 
 const btnLogin = document.getElementById("login");
@@ -5,21 +8,22 @@ const btnLogin = document.getElementById("login");
 const formCo = document.getElementById("formCo");
 const errorAll = document.getElementById("errorAll");
 
-///////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////// Gestion des erreurs, log-in
+// ****************************************************************************************** FETCH FUNCTION
 
+// Fonction pour gérer les erreurs
 // La fonction prend deux arguments et affiche le message
 // d'erreur si l'un des deux n'est pas valide
 function setError(type, status) {
   if (type === "email" || type === "password")
     errorAll.style.display = status ? "block" : "none";
 }
+
 // Soumission du formulaire de connexion
 formCo.addEventListener("submit", async function (event) {
   event.preventDefault();
-  // Extrait les données du formulaire
+
   const formData = new FormData(formCo);
-  // Récupère les valeurs des champs email et password
+  // Récupération des valeurs des champs email et password
   const emailInputData = formData.get("email");
   const passwordInputData = formData.get("password");
 
@@ -80,6 +84,3 @@ formCo.addEventListener("submit", async function (event) {
       }
     });
 });
-
-// Rajouter l'affichage de l'erreur de connexion lorsque l'e-mail
-// est bon mais pas le mdp

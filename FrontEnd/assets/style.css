@@ -109,7 +109,7 @@ nav,
 section {
   display: block;
 }
-/* Avoid page moving because of the scrollbar */
+/* Évite que la page soit affectée par la scrollbar */
 html {
   overflow-y: scroll;
 }
@@ -354,8 +354,14 @@ button:focus {
   margin-top: 10px;
 }
 
+#errorFormSize {
+  display: none;
+  color: red;
+  margin: 5px 0px !important;
+}
+
 /*************************************************************************************
-********************************************************************* Mode édition **/
+********************************************************************* MODE ÉDITION **/
 
 i {
   font-size: 17px;
@@ -365,7 +371,7 @@ i {
   display: none;
 }
 
-.editionMode {
+.divEdition {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -394,15 +400,13 @@ i {
 #mesProjets h2 {
   justify-content: flex-end;
   text-align: right;
-  width: 59%;
+  width: 58%;
   margin: 0;
-
 }
 
 .modifierProjets {
   width: 41%;
   padding-top: 3px;
-  /* display: none; */
 }
 
 .modifierProjets i {
@@ -423,7 +427,7 @@ i {
   background-color: transparent;
 }
 
-/* MADA MADA */
+/*************************************************************************** MODALE */
 
 .modal {
   display: none;
@@ -471,12 +475,13 @@ i {
 }
 
 #back {
-  display: none;
+  display: flex;
   position: absolute;
   cursor: pointer;
 }
 
-#closeBtn {
+#closeBtn,
+#closeBtn2 {
   display: flex;
   position: absolute;
   left: 97%;
@@ -648,8 +653,6 @@ button:active {
   background-color: #a7a7a7;
 }
 
-/* boop */
-
 .uploadImagePreview {
   width: 36%;
   height: 100%;
@@ -657,26 +660,20 @@ button:active {
 }
 
 #photoList::-webkit-scrollbar {
-	width: 6px;
-	background-color: #F5F5F5;
+  width: 6px;
+  background-color: #f5f5f5;
 }
- 
-#photoList::-webkit-scrollbar-track {
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	background-color: #F5F5F5;
-}
- 
-#photoList::-webkit-scrollbar-thumb {
-	background-color: #a1a1a1;
 
+#photoList::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #f5f5f5;
+}
+
+#photoList::-webkit-scrollbar-thumb {
+  background-color: #a1a1a1;
 }
 
 .btnValiderColor {
   background-color: #1d6154 !important;
   transition: 1s;
 }
-
-/* À modifier : le h2 "Mes Projets" n'est pas centré correctement
-à cause de la div rajoutée "modifierProjets" */
-/* Position relative pour le -modifier
-/* scroll barre overflow

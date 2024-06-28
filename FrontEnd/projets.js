@@ -16,16 +16,17 @@ let worksList = [];
 worksList = await apiWorks.json();
 
 // Fonction de génération des <figures> de la galerie
-export async function genWorks() {
-  const worksList = await fetch("http://localhost:5678/api/works").then((res) =>
-    res.json()
-  );
+export async function genWorks(filteredWorksList) {
+  // À cause de la const dessous, le rechargement est saccadé
+  // const worksList = await fetch("http://localhost:5678/api/works").then((res) =>
+  //   res.json()
+  // );
 
   const divGallery = document.querySelector(".gallery");
   divGallery.innerHTML = "";
 
-  for (let i = 0; i < worksList.length; i++) {
-    const article = worksList[i];
+  for (let i = 0; i < filteredWorksList.length; i++) {
+    const article = filteredWorksList[i];
 
     const figureWorks = document.createElement("figure");
     figureWorks.dataset.id = article.id;
@@ -63,8 +64,8 @@ btnTous.addEventListener("click", function () {
 // Filtre d'Objets
 const btnObjects = document.querySelector(".btnObjets");
 btnObjects.addEventListener("click", function () {
-  const objectsFilter = worksList.filter(function (work) {
-    return work.categoryId === 1;
+  const objectsFilter = worksList.filter(function (categoryWorksList) {
+    return categoryWorksList.categoryId === 1;
   });
   console.table(objectsFilter);
   document.querySelector(".gallery").innerHTML = "";
@@ -74,8 +75,8 @@ btnObjects.addEventListener("click", function () {
 // Filtre d'Appartements
 const btnAppt = document.querySelector(".btnAppt");
 btnAppt.addEventListener("click", function () {
-  const apptFilter = worksList.filter(function (work) {
-    return work.categoryId === 2;
+  const apptFilter = worksList.filter(function (categoryWorksList) {
+    return categoryWorksList.categoryId === 2;
   });
   console.table(apptFilter);
   document.querySelector(".gallery").innerHTML = "";
@@ -85,8 +86,8 @@ btnAppt.addEventListener("click", function () {
 // Filtre d'Hôtels & Restaurants
 const btnHotelsRest = document.querySelector(".btnHotelsRest");
 btnHotelsRest.addEventListener("click", function () {
-  const HotelsRestFilter = worksList.filter(function (work) {
-    return work.categoryId === 3;
+  const HotelsRestFilter = worksList.filter(function (categoryWorksList) {
+    return categoryWorksList.categoryId === 3;
   });
   console.table(HotelsRestFilter);
   document.querySelector(".gallery").innerHTML = "";
