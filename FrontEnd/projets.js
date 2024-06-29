@@ -1,5 +1,4 @@
-///////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////// Général
+// ********************************************************************************************* VARIABLE(S)
 
 const apiWorks = await fetch("http://localhost:5678/api/works");
 const getElement = (selector) => document.querySelector(selector);
@@ -9,19 +8,13 @@ btnProjets.addEventListener("click", function () {
   genWorks(worksList);
 });
 
-///////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////// Génération dynamique des projets
+// *************************************************************************************** AFFICHAGE GALERIE
 
 let worksList = [];
 worksList = await apiWorks.json();
 
 // Fonction de génération des <figures> de la galerie
 export async function genWorks(filteredWorksList) {
-  // À cause de la const dessous, le rechargement est saccadé
-  // const worksList = await fetch("http://localhost:5678/api/works").then((res) =>
-  //   res.json()
-  // );
-
   const divGallery = document.querySelector(".gallery");
   divGallery.innerHTML = "";
 
@@ -44,13 +37,12 @@ export async function genWorks(filteredWorksList) {
 console.table(worksList);
 genWorks(worksList);
 
-///////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////// Filtres
+// ************************************************************************************************* FILTRES
 
+// Le Set ne permet pas d'utiliser .filter, on le change donc en Array
 const categoryWorksSet = new Set(
   worksList.map((mapCatId) => mapCatId.categoryId)
 );
-// Le Set ne permet pas d'utiliser .filter, on le change donc en Array
 const categoryWorksList = Array.from(categoryWorksSet);
 
 // Filtre Tous
@@ -94,8 +86,7 @@ btnHotelsRest.addEventListener("click", function () {
   genWorks(HotelsRestFilter);
 });
 
-///////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////// Gestion du log-out
+// ************************************************************************************************* LOG OUT
 
 const btnLogout = document.getElementById("logout");
 
