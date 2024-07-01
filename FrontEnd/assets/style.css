@@ -354,7 +354,7 @@ button:focus {
   margin-top: 10px;
 }
 
-#errorFormSize {
+#error-form-size {
   display: none;
   color: red;
   margin: 5px 0px !important;
@@ -371,7 +371,7 @@ i {
   display: none;
 }
 
-.divEdition {
+.div-edition {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -387,34 +387,34 @@ i {
   background-color: black;
 }
 
-.marginHeader {
+.margin-header {
   margin-top: 90px;
 }
 
-.mesProjets {
+.mes-projets {
   display: flex;
   width: 100%;
   margin-bottom: 50px;
 }
 
-#mesProjets h2 {
+#mes-projets h2 {
   justify-content: flex-end;
   text-align: right;
   width: 58%;
   margin: 0;
 }
 
-.modifierProjets {
+.modifier-projets {
   width: 41%;
   padding-top: 3px;
 }
 
-.modifierProjets i {
+.modifier-projets i {
   font-size: 16px;
   margin-left: 15px;
 }
 
-.modifierProjets button {
+.modifier-projets button {
   font-family: "Work Sans";
   font-size: 13px;
   color: black;
@@ -422,7 +422,7 @@ i {
   padding-left: 7px;
 }
 
-.modifierProjets button:focus {
+.modifier-projets button:focus {
   color: black;
   background-color: transparent;
 }
@@ -443,7 +443,7 @@ i {
   background-color: rgba(0, 0, 0, 0.3);
 }
 
-.modalContent {
+.modal-content {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -456,7 +456,7 @@ i {
   margin-top: 3%;
 }
 
-.modalContent h2 {
+.modal-content h2 {
   font-family: Work Sans;
   font-weight: 100;
   color: black;
@@ -464,13 +464,13 @@ i {
   margin: 40px 0px 50px 0px;
 }
 
-.divButton {
+.div-button {
   display: flex;
   width: 95%;
   position: relative;
 }
 
-.divButton i {
+.div-button i {
   font-size: 25px;
 }
 
@@ -480,15 +480,15 @@ i {
   cursor: pointer;
 }
 
-#closeBtn,
-#closeBtn2 {
+#close-btn,
+#close-btn2 {
   display: flex;
   position: absolute;
   left: 97%;
   cursor: pointer;
 }
 
-.photoList {
+.photo-list {
   display: flex;
   flex-wrap: wrap;
   position: relative;
@@ -500,7 +500,7 @@ i {
   overflow-y: auto;
 }
 
-.modalContent button {
+.modal-content button {
   display: block;
   font-size: 15px;
   color: white;
@@ -530,7 +530,7 @@ button:active {
   padding-bottom: 17px;
 }
 
-#deleteImgBtn {
+#delete-img-btn {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -549,7 +549,7 @@ button:active {
 }
 
 /******************************************************************* FORMULAIRE ALL */
-#formAjoutPhoto {
+#form-ajout-photo {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -557,7 +557,7 @@ button:active {
 }
 /******************************************************************* DIV AJOUT PHOTOS */
 
-.divAjoutPhoto {
+.div-ajout-photo {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -568,19 +568,19 @@ button:active {
   margin-bottom: 5px;
 }
 
-.divAjoutPhoto span {
+.div-ajout-photo span {
   display: flex;
   justify-content: center;
   width: 100%;
   margin: 22px 0px 13px 0px;
 }
 
-.divAjoutPhoto i {
+.div-ajout-photo i {
   font-size: 80px;
   color: #b9c5cc;
 }
 
-.divUploadFile {
+.div-upload-file {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -599,21 +599,21 @@ button:active {
 
 /********************************************************************* DIV FORMULAIRES */
 
-.divForm {
+.div-form {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 75%;
 }
 
-.divForm label {
+.div-form label {
   display: flex;
   width: 100%;
   font-size: 17px;
   margin-top: 23px;
 }
 
-#inputTitle,
+#input-title,
 #cat {
   display: flex;
   width: 100%;
@@ -637,43 +637,48 @@ button:active {
   background-size: 10px;
 }
 
-#inputTitle:focus,
+#input-title:focus,
 #cat:focus {
   outline: none;
 }
 
-.divBorder {
+.div-border {
   margin-top: 49px;
   width: 100%;
   height: 1px;
   background: #b3b3b3;
 }
 
-#btnValider {
+#btn-valider {
   background-color: #a7a7a7;
 }
 
-.uploadImagePreview {
+.upload-image-preview {
   width: 36%;
   height: 100%;
   object-fit: cover;
 }
 
-#photoList::-webkit-scrollbar {
+#photo-list::-webkit-scrollbar {
   width: 6px;
   background-color: #f5f5f5;
 }
 
-#photoList::-webkit-scrollbar-track {
+#photo-list::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   background-color: #f5f5f5;
 }
 
-#photoList::-webkit-scrollbar-thumb {
+#photo-list::-webkit-scrollbar-thumb {
   background-color: #a1a1a1;
 }
 
-.btnValiderColor {
+.btn-valider-color {
   background-color: #1d6154 !important;
   transition: 1s;
+}
+
+.error-general {
+  display: none;
+  color: red;
 }

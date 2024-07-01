@@ -9,7 +9,9 @@ let sessionToken = sessionStorage.getItem("token");
 // HTML tag selection/navigation constants
 const body = document.querySelector("body");
 const header = document.querySelector("header");
-const titlePortfolio = document.getElementById("mesProjets");
+const titlePortfolio = document.getElementById("mes-projets");
+const errorGeneral1 = document.getElementById("error-general1");
+const errorGeneral2 = document.getElementById("error-general2");
 
 // ****************************************************************************************** FETCH FUNCTION
 
@@ -39,14 +41,14 @@ function logStatus(log) {
   if (sessionToken !== null) {
     logStatus = true;
 
-    btnLogout.style.display = "block";
+    btnLogout.style.display = "flex";
     btnLogin.style.display = "none";
     filters.style.display = "none";
 
     return logStatus;
   }
   btnLogout.style.display = "none";
-  btnLogin.style.display = "block";
+  btnLogin.style.display = "flex";
 
   return logStatus;
 }
@@ -68,7 +70,7 @@ function displaySiteElements() {
   let querySelectorDivEdition = document.querySelector("editionMode");
 
   if (!querySelectorDivEdition) {
-    header.className = "marginHeader";
+    header.className = "margin-header";
     // Création du mode édition
     const divEditionElement = divEdCreate(querySelectorDivEdition);
     const iElement = iCreate();
@@ -98,6 +100,7 @@ function displayFirstModalElements() {
   const modalTitleElement = modalTitleCreate();
   const photoListElement = photoListCreate();
   const btnAjoutElement = btnAjoutCreate();
+  const errorGeneral1 = errorGeneral1Create();
 
   appendChildFirstModal(
     modalElement,
@@ -106,7 +109,8 @@ function displayFirstModalElements() {
     modalCloseBtnElement,
     modalTitleElement,
     photoListElement,
-    btnAjoutElement
+    btnAjoutElement,
+    errorGeneral1
   );
 
   modalContent1Element.style.display = "none";
@@ -138,6 +142,7 @@ function displaySecondModalElements() {
   const btnValiderElement = btnValiderCreate();
   const defaultOptionElement = defaultOptionCreate();
   const errorFormElement = errorFormCreate();
+  const errorGeneral2 = errorGeneral2Create();
 
   appendChildSecondModal(
     modalContent2Element,
@@ -162,7 +167,8 @@ function displaySecondModalElements() {
     divBorderElement,
     btnValiderElement,
     defaultOptionElement,
-    errorFormElement
+    errorFormElement,
+    errorGeneral2
   );
   // Génération des options de l'input select (catégories)
   const options = [
@@ -186,8 +192,8 @@ function displaySecondModalElements() {
 function ModalProcessing() {
   const arrowBack = document.getElementById("back");
   const modal = document.getElementById("modalId");
-  const firstPage = document.getElementById("modalContent1");
-  const secondPage = document.getElementById("modalContent2");
+  const firstPage = document.getElementById("modal-content1");
+  const secondPage = document.getElementById("modal-content2");
 
   onChangeButton(modal, firstPage, secondPage);
   onAddButton(modal, firstPage, secondPage);
@@ -196,6 +202,8 @@ function ModalProcessing() {
   onSelectPicture();
   onFormSubmit(firstPage, secondPage);
   arrowBackModalProcessing(arrowBack, firstPage, secondPage);
+  errorGeneral1Create();
+  errorGeneral2Create();
 }
 
 // ************************************************************************************ PROCESSING FUNCTIONS
@@ -214,9 +222,13 @@ function onChangeButton(modal, firstPage, secondPage) {
 }
 
 // Fonction de génération des photos dans la modale et leur suppression
+//
 function genPhoto() {
-  const photoList = document.getElementById("photoList");
-  photoList.innerHTML = "";
+  const photoList = document.getElementById("photo-list");
+
+  while (photoList.firstChild) {
+    photoList.removeChild(photoList.firstChild);
+  }
 
   // Récupération des données de l'API
   fetch("http://localhost:5678/api/works")
@@ -234,13 +246,12 @@ function genPhoto() {
         wrapper.className = "image-wrapper";
 
         const deleteImgBtn = document.createElement("button");
-        deleteImgBtn.setAttribute("id", "deleteImgBtn");
+        deleteImgBtn.setAttribute("id", "delete-img-btn");
         deleteImgBtn.setAttribute("type", "button");
         deleteImgBtn.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
 
         deleteImgBtn.onclick = async function (event) {
           event.preventDefault();
-          console.log(id);
 
           try {
             const response = await fetch(
@@ -254,25 +265,24 @@ function genPhoto() {
             );
 
             if (!response.ok) {
-              throw new Error("Erreur lors de la suppresion de l'image.");
+              throw new Error("Erreur lors de la suppression de l'image.");
             }
 
-            console.log(`Image avec l'ID ${id} supprimée avec succès.`);
             wrapper.remove();
             fetchAndGenerateGallery();
           } catch (error) {
-            console.log(error);
+            displayErrorGeneral1();
           }
-          return false;
         };
+
         wrapper.appendChild(photos);
         wrapper.appendChild(deleteImgBtn);
         photoList.appendChild(wrapper);
       });
     })
-    .catch((error) =>
-      console.error("Erreur lors de la récupération des données : ", error)
-    );
+    .catch((error) => {
+      displayErrorGeneral1();
+    });
 }
 // Function du bouton d'ajout de projets, changeant l'affichage
 function onAddButton(modal, firstPage, secondPage) {
@@ -282,14 +292,14 @@ function onAddButton(modal, firstPage, secondPage) {
   btnAjout.addEventListener("click", function () {
     firstPage.style.display = "none";
     secondPage.style.display = "flex";
-    document.getElementById("formAjoutPhoto").reset();
+    document.getElementById("form-ajout-photo").reset();
     if (iconePaysage !== "flex") {
-      document.getElementById("uploadImagePreview").style.display = "none";
+      document.getElementById("upload-image-preview").style.display = "none";
       document.getElementById("divTextLabel").style.display = "flex";
       document.getElementById("file").style.display = "none";
       iconePaysage.style.display = "flex";
       document.getElementById("pMoMax").style.display = "flex";
-      document.getElementById("divUploadFile").style.display = "flex";
+      document.getElementById("div-upload-file").style.display = "flex";
     }
     const selectCat = document.getElementById("cat");
     selectCat.value = "";
@@ -297,17 +307,17 @@ function onAddButton(modal, firstPage, secondPage) {
 }
 
 function onCLoseButton(modal) {
-  const btnClose = document.getElementById("closeBtn");
+  const btnClose = document.getElementById("close-btn");
 
   btnClose.onclick = function () {
     modal.style.display = "none";
-    document.getElementById("formAjoutPhoto").reset();
+    document.getElementById("form-ajout-photo").reset();
   };
-  const btnClose2 = document.getElementById("closeBtn2");
+  const btnClose2 = document.getElementById("close-btn2");
 
   btnClose2.onclick = function () {
     modal.style.display = "none";
-    document.getElementById("formAjoutPhoto").reset();
+    document.getElementById("form-ajout-photo").reset();
   };
 }
 
@@ -322,34 +332,32 @@ function onWindowClick() {
 
 // Fonction permettant la preview de l'image choisie et génération des erreurs liées
 function onSelectPicture() {
-  const uploadImagePreview = document.getElementById("uploadImagePreview");
+  const uploadImagePreview = document.getElementById("upload-image-preview");
   const divTextLabel = document.getElementById("divTextLabel");
   const divTextInput = document.getElementById("file");
   const iconePaysage = document.getElementById("iconePaysage");
   const pMoMax = document.getElementById("pMoMax");
-  const divUploadFile = document.getElementById("divUploadFile");
+  const divUploadFile = document.getElementById("div-upload-file");
   divTextInput.addEventListener("change", function () {
     const file = this.files[0];
     if (file) {
       if (!["jpg", "png"].includes(file.name.toLowerCase().split(".").pop())) {
-        console.error("error extension");
         return;
       }
       // Message d'erreur si le poids est supérieur à 4mo
       if (Math.round(file.size / 1024) >= 4096) {
-        const errorFormSize = document.getElementById("errorFormSize");
+        const errorFormSize = document.getElementById("error-form-size");
         errorFormSize.style.display = "flex";
-        console.error("file size");
         return;
       } else {
-        const errorFormSize = document.getElementById("errorFormSize");
+        const errorFormSize = document.getElementById("error-form-size");
         errorFormSize.style.display = "none";
       }
 
       const reader = new FileReader();
       reader.onload = function (e) {
         uploadImagePreview.src = e.target.result;
-        uploadImagePreview.style.display = "block";
+        uploadImagePreview.style.display = "flex";
         divTextLabel.style.display = "none";
         divTextInput.style.display = "none";
         iconePaysage.style.display = "none";
@@ -364,21 +372,20 @@ function onSelectPicture() {
 // Function d'envoie d'un nouveau projet via le formulaire
 function onFormSubmit(firstPage, secondPage) {
   document
-    .getElementById("formAjoutPhoto")
+    .getElementById("form-ajout-photo")
     .addEventListener("submit", function (e) {
       e.preventDefault();
 
       let userFile = document.getElementById("file").files[0];
 
-      const userFileTitle = document.getElementById("inputTitle").value;
+      const userFileTitle = document.getElementById("input-title").value;
       const userFileCat = document.getElementById("cat").value;
-      const formAjoutPhoto = document.getElementById("formAjoutPhoto");
+      const formAjoutPhoto = document.getElementById("form-ajout-photo");
 
       // Gestion des erreurs du formulaire
       if (!userFile || !userFileTitle || !userFileCat) {
         const errorForm = document.getElementById("errorForm");
         errorForm.style.display = "flex";
-        console.log("Form validation failed");
         return;
       } else {
         const errorForm = document.getElementById("errorForm");
@@ -413,34 +420,25 @@ function onFormSubmit(firstPage, secondPage) {
           },
           body: formData,
         })
-          .then((res) => {
-            if (!res.ok) {
-              return res.text().then((errorText) => {
-                throw new Error(
-                  `Erreur HTTP ! statut : ${res.status}, message : ${errorText}`
-                );
-              });
-            }
-            return res.json();
-          })
+          .then((res) => res.json())
+
           .then((data) => {
-            console.log("Form submission successful", data);
             fetchAndGenerateGallery();
             document.getElementById("file").value = "";
-            document.getElementById("inputTitle").value = "";
+            document.getElementById("input-title").value = "";
             document.getElementById("cat").selectedIndex = 0;
-            console.log((document.getElementById("file").value = ""));
 
-            console.log("Form reset");
             firstPage.style.display = "flex";
             secondPage.style.display = "none";
           })
-          .catch((err) => {
-            console.log(err.message);
+          .catch((error) => {
+            displayErrorGeneral2();
           });
       };
       reader.readAsDataURL(userFile);
-      document.getElementById("btnValider").classList.remove("btnValiderColor");
+      document
+        .getElementById("btn-valider")
+        .classList.remove("btn-valider-color");
       formAjoutPhoto.reset();
     });
   checkFormFields();
@@ -448,9 +446,9 @@ function onFormSubmit(firstPage, secondPage) {
 
 // Fonction vérifiant si le formulaire est remplis correctement
 function checkFormFields() {
-  const btnValider = document.getElementById("btnValider");
+  const btnValider = document.getElementById("btn-valider");
   const userFileInput = document.getElementById("file");
-  const userFileTitleInput = document.getElementById("inputTitle");
+  const userFileTitleInput = document.getElementById("input-title");
   const userFileCatInput = document.getElementById("cat");
 
   const userFile = userFileInput.files[0];
@@ -458,11 +456,9 @@ function checkFormFields() {
   const userFileCat = userFileCatInput.value;
 
   if (userFile && userFileTitle && userFileCat) {
-    btnValider.classList.add("btnValiderColor");
-    console.log("Validé");
+    btnValider.classList.add("btn-valider-color");
   } else {
-    btnValider.classList.remove("btnValiderColor");
-    console.log("Non validé");
+    btnValider.classList.remove("btn-valider-color");
   }
 
   userFileInput.addEventListener("change", checkFormFields);
@@ -478,14 +474,18 @@ async function fetchAndGenerateGallery() {
     generateGallery(worksList);
     genPhoto();
   } catch (error) {
-    console.error("Erreur lors de la récupération des travaux :", error);
+    displayErrorGeneral1();
+    displayErrorGeneral2();
   }
 }
 
 // Fonction permettant la génération de la galerie (index)
 async function generateGallery(worksList) {
   const divGallery = document.querySelector(".gallery");
-  divGallery.innerHTML = "";
+  while (divGallery.firstChild) {
+    divGallery.removeChild(divGallery.firstChild);
+  }
+
   for (let i = 0; i < worksList.length; i++) {
     const article = worksList[i];
 
@@ -509,11 +509,19 @@ function arrowBackModalProcessing(arrowBack, firstPage, secondPage) {
   };
 }
 
+function displayErrorGeneral1() {
+  errorGeneral1.style.display = "flex";
+}
+
+function displayErrorGeneral2() {
+  errorGeneral2.style.display = "flex";
+}
+
 // ***************************************************************************************** CREATE ELEMENTS
 
 function divEdCreate(nom) {
   nom = document.createElement("div");
-  nom.className = "divEdition";
+  nom.className = "div-edition";
   nom.style.display = "flex";
   return nom;
 }
@@ -532,7 +540,7 @@ function pCreate() {
 
 function divModCreate() {
   const divModifier = document.createElement("div");
-  divModifier.className = "modifierProjets";
+  divModifier.className = "modifier-projets";
   return divModifier;
 }
 
@@ -558,15 +566,15 @@ function modalCreate() {
 
 function modalContent1Create() {
   const modalContent1 = document.createElement("div");
-  modalContent1.setAttribute("id", "modalContent1");
-  modalContent1.className = "modalContent";
+  modalContent1.setAttribute("id", "modal-content1");
+  modalContent1.className = "modal-content";
   return modalContent1;
 }
 
 function divButtonCreate() {
   const divButton = document.createElement("div");
-  divButton.setAttribute("id", "divButton");
-  divButton.className = "divButton";
+  divButton.setAttribute("id", "div-button");
+  divButton.className = "div-button";
   return divButton;
 }
 
@@ -580,7 +588,7 @@ function arrowBackCreate() {
 function modalCloseBtnCreate() {
   const modalCloseBtn = document.createElement("span");
   modalCloseBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
-  modalCloseBtn.setAttribute("id", "closeBtn");
+  modalCloseBtn.setAttribute("id", "close-btn");
   return modalCloseBtn;
 }
 
@@ -593,8 +601,8 @@ function modalTitleCreate() {
 
 function photoListCreate() {
   const photoList = document.createElement("div");
-  photoList.setAttribute("id", "photoList");
-  photoList.className = "photoList";
+  photoList.setAttribute("id", "photo-list");
+  photoList.className = "photo-list";
   return photoList;
 }
 
@@ -614,8 +622,8 @@ function modalTitleAjoutCreate() {
 
 function divAjoutPhotoCreate() {
   const divAjoutPhoto = document.createElement("div");
-  divAjoutPhoto.setAttribute("id", "divAjoutPhoto");
-  divAjoutPhoto.className = "divAjoutPhoto";
+  divAjoutPhoto.setAttribute("id", "div-ajout-photo");
+  divAjoutPhoto.className = "div-ajout-photo";
   return divAjoutPhoto;
 }
 
@@ -629,16 +637,16 @@ function iconePaysageCreate() {
 function uploadImagePreviewCreate() {
   const uploadImagePreview = document.createElement("img");
   uploadImagePreview.style.display = "none";
-  uploadImagePreview.className = "uploadImagePreview";
-  uploadImagePreview.setAttribute("id", "uploadImagePreview");
+  uploadImagePreview.className = "upload-image-preview";
+  uploadImagePreview.setAttribute("id", "upload-image-preview");
   uploadImagePreview.setAttribute("src", "#");
   return uploadImagePreview;
 }
 
 function divUploadFileCreate() {
   const divUploadFile = document.createElement("div");
-  divUploadFile.setAttribute("id", "divUploadFile");
-  divUploadFile.className = "divUploadFile";
+  divUploadFile.setAttribute("id", "div-upload-file");
+  divUploadFile.className = "div-upload-file";
   return divUploadFile;
 }
 
@@ -668,20 +676,20 @@ function pMoMaxCreate() {
 
 function divFormCreate() {
   const divForm = document.createElement("div");
-  divForm.className = "divForm";
+  divForm.className = "div-form";
   return divForm;
 }
 
 function formAjoutPhotoCreate() {
   const formAjoutPhoto = document.createElement("form");
-  formAjoutPhoto.setAttribute("id", "formAjoutPhoto");
+  formAjoutPhoto.setAttribute("id", "form-ajout-photo");
   formAjoutPhoto.setAttribute("action", "");
   return formAjoutPhoto;
 }
 
 function inputLabelCreate() {
   const inputLabel = document.createElement("label");
-  inputLabel.setAttribute("for", "inputTitle");
+  inputLabel.setAttribute("for", "input-title");
   inputLabel.innerText = "Titre";
   return inputLabel;
 }
@@ -689,7 +697,7 @@ function inputLabelCreate() {
 function inputTitleCreate() {
   const inputTitle = document.createElement("input");
   inputTitle.setAttribute("type", "text");
-  inputTitle.setAttribute("id", "inputTitle");
+  inputTitle.setAttribute("id", "input-title");
   return inputTitle;
 }
 
@@ -710,13 +718,13 @@ function selectCreate() {
 
 function divBorderCreate() {
   const divBorder = document.createElement("div");
-  divBorder.className = "divBorder";
+  divBorder.className = "div-border";
   return divBorder;
 }
 
 function btnValiderCreate() {
   const btnValider = document.createElement("button");
-  btnValider.setAttribute("id", "btnValider");
+  btnValider.setAttribute("id", "btn-valider");
   btnValider.setAttribute("type", "submit");
   btnValider.innerText = "Valider";
   return btnValider;
@@ -724,8 +732,8 @@ function btnValiderCreate() {
 
 function modalContent2Create() {
   const modalContent2 = document.createElement("div");
-  modalContent2.setAttribute("id", "modalContent2");
-  modalContent2.className = "modalContent";
+  modalContent2.setAttribute("id", "modal-content2");
+  modalContent2.className = "modal-content";
   return modalContent2;
 }
 
@@ -740,15 +748,15 @@ function defaultOptionCreate() {
 
 function divButton2Create() {
   const divButton2 = document.createElement("div");
-  divButton2.setAttribute("id", "divButton2");
-  divButton2.className = "divButton";
+  divButton2.setAttribute("id", "div-button2");
+  divButton2.className = "div-button";
   return divButton2;
 }
 
 function modalCloseBtn2Create() {
   const modalCloseBtn2 = document.createElement("span");
   modalCloseBtn2.innerHTML = '<i class="fa-solid fa-xmark"></i>';
-  modalCloseBtn2.setAttribute("id", "closeBtn2");
+  modalCloseBtn2.setAttribute("id", "close-btn2");
   return modalCloseBtn2;
 }
 
@@ -762,10 +770,26 @@ function errorFormCreate() {
 
 function errorFormSizeCreate() {
   const errorFormSize = document.createElement("span");
-  errorFormSize.setAttribute("id", "errorFormSize");
+  errorFormSize.setAttribute("id", "error-form-size");
   errorFormSize.innerText = "Le fichier est trop lourd ! 4mo max";
-  errorFormSize.className = "error-messageSize";
+  // errorFormSize.className = "error-messageSize";
   return errorFormSize;
+}
+
+function errorGeneral1Create() {
+  const errorGeneral1 = document.createElement("span");
+  errorGeneral1.setAttribute("id", "error-general1");
+  errorGeneral1.innerText = "Un problème est survenu.";
+  errorGeneral1.className = "error-general";
+  return errorGeneral1;
+}
+
+function errorGeneral2Create() {
+  const errorGeneral2 = document.createElement("span");
+  errorGeneral2.setAttribute("id", "error-general2");
+  errorGeneral2.innerText = "Un problème est survenu.";
+  errorGeneral2.className = "error-general";
+  return errorGeneral2;
 }
 
 // ***************************************************************************************** APPEND ELEMENTS
@@ -792,13 +816,16 @@ function appendChildFirstModal(
   modalCloseBtnElement,
   modalTitleElement,
   photoListElement,
-  btnAjoutElement
+  btnAjoutElement,
+  errorGeneral1
 ) {
   divButtonElement.appendChild(modalCloseBtnElement);
+  modalContent1Element.appendChild(errorGeneral1);
   modalContent1Element.appendChild(divButtonElement);
   modalContent1Element.appendChild(modalTitleElement);
   modalContent1Element.appendChild(photoListElement);
   modalContent1Element.appendChild(btnAjoutElement);
+
   modalElement.appendChild(modalContent1Element);
   document.body.appendChild(modalElement);
 }
@@ -826,7 +853,8 @@ function appendChildSecondModal(
   divBorderElement,
   btnValiderElement,
   defaultOptionElement,
-  errorFormElement
+  errorFormElement,
+  errorGeneral2
 ) {
   const modalElement = document.getElementById("modalId");
 
@@ -855,10 +883,10 @@ function appendChildSecondModal(
   formAjoutPhotoElement.appendChild(divAjoutPhotoElement);
   formAjoutPhotoElement.appendChild(divFormElement);
 
+  modalContent2Element.appendChild(errorGeneral2);
   modalContent2Element.appendChild(divButton2Element);
   modalContent2Element.appendChild(modalTitleAjoutElement);
   modalContent2Element.appendChild(formAjoutPhotoElement);
 
-  modalElement.appendChild(modalContent2Element);
   modalElement.appendChild(modalContent2Element);
 }
